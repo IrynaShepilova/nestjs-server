@@ -4,14 +4,14 @@ const config: DataSourceOptions = {
     type: 'postgres',
     host: 'localhost',
     port: 5432,
-    username: 'mediumclone',
+    username: 'dbuser',
     password: '1234db',
-    database: 'mediumclone',
+    database: 'database',
     entities: [
         __dirname + '/**/*.entity{.ts,.js}',
-
     ],
-    synchronize: true,
+    synchronize: false,
+    migrations: [ __dirname + '/**/migrations/**/*.{.ts,.js}'],
 };
 
 export default config;

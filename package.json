@@ -1,5 +1,5 @@
 {
-    "name": "mediumclone_nestjs",
+    "name": "nestjs_server",
     "version": "0.0.1",
     "description": "",
     "author": "",
@@ -17,7 +17,11 @@
         "test:watch": "jest --watch",
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-        "test:e2e": "jest --config ./test/jest-e2e.json"
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+        "db:drop": "yarn typeorm  -d ./src/migrations.config.ts schema:drop",
+        "db:create": "yarn typeorm --  -d ./src/migrations.config.ts migration:generate ./src/migrations/$npm_config_name",
+        "db:run": "yarn typeorm  -- migration:run  -d ./src/migrations.config.ts"
     },
     "dependencies": {
         "@nestjs/common": "^9.0.0",
