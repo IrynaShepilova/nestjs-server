@@ -20,24 +20,22 @@ export class UserService {
         const userByEmail = await this.userRepository.findOneBy({
             email: createUserDto.email,
         });
-        const userByUsername = await this.userRepository.findOneBy({
-            username: createUserDto.username,
-        });
-        if (userByEmail || userByUsername){
+
+        if (userByEmail){
             throw new HttpException(
-                'Email or username are taken',
+                'Email already taken',
                 HttpStatus.UNPROCESSABLE_ENTITY,
             );
         }
         const newUser = new UserEntity();
         Object.assign(newUser, createUserDto);
+        console.log('create new user, email: ', newUser.email );
         return await this.userRepository.save(newUser);
     }
 
     generateJwt(user: UserEntity):string {
         return sign({
             id: user.id,
-            username: user.username,
             email: user.email
         }, JWT_SECRET);
     }

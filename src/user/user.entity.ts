@@ -10,9 +10,6 @@ export class UserEntity {
     email: string;
 
     @Column()
-    username: string;
-
-    @Column()
     password: string;
 
     @BeforeInsert()
